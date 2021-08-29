@@ -75,9 +75,8 @@
             return true;
         }
 
-        // 게임에 졌을 때 실행할 함수
-        function defeated() {
-            $massage.textContent = `패배! 정답은 ${answer.join('')}`;
+        // 게임이 종료됐을 때 실행할 함수
+        function end() {
             $form.removeEventListener('submit', submitEv);
             $form.addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -96,7 +95,7 @@
             //입력값 문제가 없을 시
             if(answer.join('') === value) { //.join('') -> 배열을 문자열로 바꿔줌
                 $massage.textContent = `홈런! 승리하셨습니다!`;
-                $massage.innerHTML = $massage.innerHTML + '<br/><button type="button" onClick="window.location.reload()">재시작</button>';
+                end();
                 return;
             }
             //몇 스트라이크 몇 볼인지 검사
@@ -133,7 +132,8 @@
             }
 
             if(out == 3 || tries.length >= 9) { // 아웃이 3번이거나, tries배열의 길이가 9보다 크거나 같을때(10번시도시)
-                defeated();
+                $massage.textContent = `패배! 정답은 ${answer.join('')}`;
+                end();
                 return;
             }
             tries.push(value);

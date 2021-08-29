@@ -81,6 +81,9 @@
             $form.addEventListener('submit', (e) => {
                 e.preventDefault();
             });
+            $input.addEventListener('input', (e) => {
+                e.target.value = '';
+            });
             $massage.innerHTML = $massage.innerHTML + '<br/><button type="button" onClick="window.location.reload()">재시작</button>';
         }
 

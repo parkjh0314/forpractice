@@ -4,8 +4,8 @@ const items = [
         "type":"tshirt",
         "gender":"male",
         "size":"large, midium, small",
-        "color":"blue",
-        "image":"imgs/blue_t.png"
+        "color":"pink",
+        "image":"imgs/pink_t.png"
     },
     {
         "type":"tshirt",
@@ -18,15 +18,15 @@ const items = [
         "type":"tshirt",
         "gender":"male",
         "size":"large, midium, small",
-        "color":"pink",
-        "image":"imgs/pink_t.png"
+        "color":"blue",
+        "image":"imgs/blue_t.png"
     },
     {
         "type":"tshirt",
         "gender":"female",
         "size":"large, midium, small",
-        "color":"blue",
-        "image":"imgs/blue_t.png"
+        "color":"pink",
+        "image":"imgs/pink_t.png"
     },
     {
         "type":"tshirt",
@@ -39,8 +39,8 @@ const items = [
         "type":"tshirt",
         "gender":"female",
         "size":"large, midium, small",
-        "color":"pink",
-        "image":"imgs/pink_t.png"
+        "color":"blue",
+        "image":"imgs/blue_t.png"
     },
     {
         "type":"pants",
@@ -53,15 +53,15 @@ const items = [
         "type":"pants",
         "gender":"male",
         "size":"large, midium, small",
-        "color":"blue",
-        "image":"imgs/blue_p.png"
+        "color":"yellow",
+        "image":"imgs/yellow_p.png"
     },
     {
         "type":"pants",
         "gender":"male",
         "size":"large, midium, small",
-        "color":"yellow",
-        "image":"imgs/yellow_p.png"
+        "color":"blue",
+        "image":"imgs/blue_p.png"
     },
     {
         "type":"pants",
@@ -88,8 +88,8 @@ const items = [
         "type":"skirt",
         "gender":"female",
         "size":"large, midium, small",
-        "color":"blue",
-        "image":"imgs/blue_s.png"
+        "color":"pink",
+        "image":"imgs/pink_s.png"
     },
     {
         "type":"skirt",
@@ -103,7 +103,7 @@ const items = [
         "gender":"female",
         "size":"large, midium, small",
         "color":"blue",
-        "image":"imgs/pink_s.png"
+        "image":"imgs/blue_s.png"
     }
 ]
 

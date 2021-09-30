@@ -184,6 +184,7 @@ const goReset = () => {
     document.querySelectorAll('input[name="position"]:checked').forEach(item => { // 직책 초기화
         item.checked = false;
     });
+    document.querySelector('div.attached').textContent = '파일첨부';
     attached = false; // 첨부 초기화
 }
 

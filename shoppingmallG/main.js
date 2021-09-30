@@ -108,7 +108,7 @@ const items = [
 ]
 
 // 클릭이벤트가 일어났을 때 
-const onClickItem = (event) => {
+const goFilterItem = (event) => {
 
     $itemLine.innerHTML = null; //태그 비우기
 
@@ -117,16 +117,16 @@ const onClickItem = (event) => {
 
     items.forEach(item => {
         if(clickItem ==='logo') {
-            showItem(item);
+            goShowItem(item);
         }
         else if (item.type == clickItem || item.color == clickItem) {
-            showItem(item);
+            goShowItem(item);
         }
     });
 }
 
 // 아이템 정보를 태그에 추가하여 화면에 출력
-const showItem = (item) => {
+const goShowItem = (item) => {
     
     let itemList = document.createElement('li'); //새로운 li태그 만들기
 
@@ -149,22 +149,22 @@ const showItem = (item) => {
 }
 
 // 필터 버튼 클릭 시
-const goFilter = (event) => {
-    const $showItem = document.querySelectorAll('ul.itemLine>li');
+const goGenderFilter = (event) => {
+    const $goShowItem = document.querySelectorAll('ul.itemLine>li');
     const gender = event.target.id.substring(0,event.target.id.length-1);
     const arr = [];
-    $showItem.forEach(item => {
+    $goShowItem.forEach(item => {
         arr.push(item.lastElementChild.textContent.indexOf(gender));
         item.style.display = '';
     });
     if(gender == 'male'){
-        $showItem.forEach(function(item, index) {
+        $goShowItem.forEach(function(item, index) {
             if (arr[index] != 0) {
                 item.style.display = 'none';
             }
         });
     } else if(gender == 'female'){
-        $showItem.forEach(function(item, index) {
+        $goShowItem.forEach(function(item, index) {
             if (arr[index] == -1) {
                 item.style.display = 'none';
             }
@@ -173,17 +173,17 @@ const goFilter = (event) => {
 }
 
 const $itemLine = document.querySelector(".itemLine");
-const $logoB = document.querySelector('#logoB').addEventListener('click', onClickItem);
-const $tshirtB = document.querySelector('#tshirtB').addEventListener('click', onClickItem);
-const $pantsB = document.querySelector('#pantsB').addEventListener('click', onClickItem);
-const $skirtB = document.querySelector('#skirtB').addEventListener('click', onClickItem);
-const $blueB = document.querySelector('#blueB').addEventListener('click', onClickItem);
-const $yellowB = document.querySelector('#yellowB').addEventListener('click', onClickItem);
-const $pinkB = document.querySelector('#pinkB').addEventListener('click', onClickItem);
-const $maleB = document.querySelector('#maleB').addEventListener('click', goFilter);
-const $femaleB = document.querySelector('#femaleB').addEventListener('click', goFilter);
+const $logoB = document.querySelector('#logoB').addEventListener('click', goFilterItem);
+const $tshirtB = document.querySelector('#tshirtB').addEventListener('click', goFilterItem);
+const $pantsB = document.querySelector('#pantsB').addEventListener('click', goFilterItem);
+const $skirtB = document.querySelector('#skirtB').addEventListener('click', goFilterItem);
+const $blueB = document.querySelector('#blueB').addEventListener('click', goFilterItem);
+const $yellowB = document.querySelector('#yellowB').addEventListener('click', goFilterItem);
+const $pinkB = document.querySelector('#pinkB').addEventListener('click', goFilterItem);
+const $maleB = document.querySelector('#maleB').addEventListener('click', goGenderFilter);
+const $femaleB = document.querySelector('#femaleB').addEventListener('click', goGenderFilter);
 
 // 첫화면 로딩 시 실행 (모든 아이템 목록 보여주기)
 items.forEach(item => {
-    showItem(item);
+    goShowItem(item);
 });

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가위바위보</title>
+    <style>
+        #computer {
+            width: 142px;
+            height: 200px;
+        }
+        
+        .finalScore {
+            font-size: 15pt;
+            font-weight: bold;
+            color: coral;
+        }
+    </style>
+</head>
+<body>
+    <div id="computer"></div>
+    <div>
+        <button id="scissors" class="btn">가위</button>
+        <button id="rock" class="btn">바위</button>
+        <button id="paper" class="btn">보</button>
+    </div>
+    <div id="result"></div>
+    <div id="score"></div>
+
+    <script>
+        const $computer = document.querySelector('#computer');
+        const $score = document.querySelector('#score');
+        const $rock = document.querySelector('#rock');
+        const $scissors = document.querySelector('#scissors');
+        const $paper = document.querySelector('#paper');
+        const $result = document.querySelector('#result');
+        const IMG_URL = './rsp.png';
+        $computer.style.background = `url(${IMG_URL}) 0 0`;
+        $computer.style.backgroundSize = 'auto 200px';
+
+        const rspX = {
+            scissors: '0',
+            rock: '-220px',
+            paper: '-440px',
+        }
+
+        let computerChoice = 'scissors';
+        const changeComputerHand = () => {
+            if(computerChoice === 'rock') {
+                computerChoice = 'scissors';
+            } else if(computerChoice === 'scissors') {
+                computerChoice = 'paper';
+            } else if(computerChoice === 'paper') {
+                computerChoice = 'rock';
+            }
+            $computer.style.background = `url(${IMG_URL}) ${rspX[computerChoice]} 0`;
+            $computer.style.backgroundSize = 'auto 200px';
+        }
+        let intervalId = setInterval(changeComputerHand, 50);
+        // setInterval, setTimeout은 id값을 리턴함
+        // 타이머마다 아이디가 달라짐
+
+        const scoreTable = {
+            rock: 0,
+            scissors: 1,
+            paper: -1,
+        };
+
+        const end = () => {
+            $result.className = 'finalScore';
+            $result.textContent = message;
+            $score.textContent = `${winScore}승 ${loseScore}패`;
+            $restart = document.createElement('button');
+            $restart.textContent = '재시작';
+            document.body.append($restart);
+
+            $restart.addEventListener('click', () => {
+                window.location.reload();
+            });
+        }
+
+    //     const restart = () => {
+    //         $result.textContent = '';
+    //         $score.textContent = '';
+    //         document.body.removeChild($restart);
+    //         intervalId = setInterval(changeComputerHand, 50);
+    //         clickable = true;
+    //         winScore = 0;
+    //         loseScore = 0;
+    //         message = '';
+    //         myChoice = '';
+    //         clickBtn();
+    // }
+
+        let clickable = true;
+        let winScore = 0;
+        let loseScore = 0;
+        let message;
+        let myChoice;
+        const clickBtn = () => {
+            if(clickable){
+                clearInterval(intervalId);
+                clickable = false;
+                //점수 계산 및 화면 표시
+                myChoice = event.target.id ==='rock'
+                    ? 'rock'
+                    : event.target.id === 'scissors'
+                        ? 'scissors'
+                        : 'paper';
+                // const myScore = scoreTable[myChoice];
+                // const computerScore = scoreTable[computerChoice];
+                const diff = scoreTable[myChoice] - scoreTable[computerChoice];
+                if([2, -1].includes(diff)) {
+                    winScore += 1;
+                    message = '승리';
+                } else if([-2, 1].includes(diff)) {
+                    loseScore += 1;
+                    message = '패배';
+                } else if(diff === 0) {
+                    message = '무승부';
+                }
+                if(winScore >= 3 || loseScore >= 3) {
+                    end();
+                } else { //누구도 승리하지 않았을 때
+                    $score.textContent = `${message} ${winScore}승 ${loseScore}패`;
+                    setTimeout(() => {
+                        clickable = true;
+                        intervalId = setInterval(changeComputerHand, 50);
+                    }, 1000);
+                }
+            } 
+        };
+        $rock.addEventListener('click', clickBtn);
+        $scissors.addEventListener('click', clickBtn);
+        $paper.addEventListener('click', clickBtn);
+
+    </script>
+</body>
+</html>
